@@ -71,8 +71,25 @@
     </div>
   </footer>
 
+  <h2>SANTIAGO VARGAS</h2>
 
-  <script src="script.js"></script>
+
+  <p>My EC2 Instance Public IP:</p>
+<div id="ec2-ip">Loading...</div>
+
+<script>
+  // Fetch the public IP of the instance from an external API
+  fetch('https://api.ipify.org?format=json')
+    .then(response => response.json())
+    .then(data => {
+      document.getElementById('ec2-ip').textContent = data.ip;
+    })
+    .catch(error => {
+      document.getElementById('ec2-ip').textContent = 'Unable to load IP.';
+      console.error('Error fetching public IP:', error);
+    });
+</script>
+
 </body>
 
 </html>
