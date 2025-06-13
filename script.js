@@ -19,11 +19,11 @@
     Note: This project is adapted from a public project. Original credits go to the respective author(s).
 -->
 */
-// Fetch the public IP of the instance from an external API
-fetch("https://api.ipify.org?format=json")
-  .then((response) => response.json())
-  .then((data) => {
-    document.getElementById("ec2-ip").textContent = data.ip;
+// Fetch the public IP from server-ip.txt (plain text)
+fetch("./server-ip.txt")
+  .then((response) => response.text())
+  .then((ip) => {
+    document.getElementById("ec2-ip").textContent = ip.trim();
   })
   .catch((error) => {
     document.getElementById("ec2-ip").textContent = "Unable to load IP.";
