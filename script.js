@@ -19,6 +19,17 @@
     Note: This project is adapted from a public project. Original credits go to the respective author(s).
 -->
 */
+// Fetch the public IP of the instance from an external API
+fetch("https://api.ipify.org?format=json")
+  .then((response) => response.json())
+  .then((data) => {
+    document.getElementById("ec2-ip").textContent = data.ip;
+  })
+  .catch((error) => {
+    document.getElementById("ec2-ip").textContent = "Unable to load IP.";
+    console.error("Error fetching public IP:", error);
+  });
+
 const smallCups = document.querySelectorAll('.cup-small')
 const liters = document.getElementById('liters')
 const percentage = document.getElementById('percentage')
@@ -57,7 +68,7 @@ function updateBigCup() {
     } else {
         percentage.style.visibility = 'visible'
         percentage.style.height = `${fullCups / totalCups * 330}px`
-        percentage.innerText = `${fullCups / totalCups * 1000}%`
+        percentage.innerText = `${(fullCups / totalCups * 100).toFixed(1)}%`
     }
 
     if (fullCups === totalCups) {
@@ -65,6 +76,6 @@ function updateBigCup() {
         remained.style.height = 0
     } else {
         remained.style.visibility = 'visible'
-        liters.innerText = `${1 - (50 * fullCups / 1000)}L`
+        liters.innerText = `${(2 - (250 * fullCups / 1000)).toFixed(1)}L`
     }
 }
